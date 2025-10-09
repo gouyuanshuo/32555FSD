@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="edu.uts.uniapp.view.controller.EnrolmentController"
+      spacing="10" style="-fx-padding:20;">
+    <Label text="Subject Enrolment" style="-fx-font-size:18;-fx-font-weight:bold;"/>
+    <Label fx:id="userLabel" style="-fx-text-fill:#555;"/>
+
+    <HBox spacing="10">
+        <Button text="Enrol new subject" onAction="#onEnrol"/>
+        <Button text="Remove subject" onAction="#onRemove"/>
+        <Button text="Show subjects" onAction="#onShow"/>
+        <Button text="Change password" onAction="#onChangePassword"/>
+        <Button text="Logout" onAction="#onLogout"/>
+    </HBox>
+
+    <HBox spacing="20" style="-fx-padding:10 0 0 0;">
+        <Label fx:id="countLabel"/>
+        <Label fx:id="avgLabel"/>
+        <Label fx:id="passLabel"/>
+    </HBox>
+</VBox>

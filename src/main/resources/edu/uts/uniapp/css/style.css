@@ -1,0 +1,118 @@
+/* ===========================
+   Global base
+   =========================== */
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-background-color: #f8f9fa;
+}
+
+/* Title labels */
+.label {
+    -fx-font-size: 14px;
+}
+
+.label.h1 {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1b4965;
+}
+
+.label.muted {
+    -fx-text-fill: #666666;
+}
+
+/* ===========================
+   Buttons
+   =========================== */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #0077b6, #023e8a);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 6 14 6 14;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #0096c7, #0077b6);
+}
+
+.button:pressed {
+    -fx-background-color: #005f8a;
+}
+
+/* ===========================
+   TextField & PasswordField
+   =========================== */
+.text-field, .password-field {
+    -fx-background-color: white;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 4 6 4 6;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #0077b6;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,119,182,0.3), 4, 0, 0, 0);
+}
+
+/* ===========================
+   TableView
+   =========================== */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #0077b6;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER;
+}
+
+.table-view .cell {
+    -fx-alignment: CENTER;
+}
+
+/* ===========================
+   Dialogs (Exception & Info)
+   =========================== */
+.dialog-pane {
+    -fx-background-color: #f8f9fa;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #0077b6;
+    -fx-text-fill: white;
+}
+
+/* ===========================
+   Hints & Error labels
+   =========================== */
+.label.error {
+    -fx-text-fill: #d90429;
+    -fx-font-weight: bold;
+}
+
+.label.success {
+    -fx-text-fill: #38b000;
+    -fx-font-weight: bold;
+}
+
+/* ===========================
+   Spacing utilities
+   =========================== */
+.vbox {
+    -fx-spacing: 10;
+}
+
+.hbox {
+    -fx-spacing: 10;
+}

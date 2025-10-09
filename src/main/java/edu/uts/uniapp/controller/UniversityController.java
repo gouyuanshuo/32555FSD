@@ -14,16 +14,11 @@ public class UniversityController {
     private final AdminController adminController = new AdminController();
 
     public void start() {
-        printBanner();
+        //printBanner();
 
         boolean running = true;
         while (running) {
-            view.println("");
-            view.println("===== University System =====");
-            view.println("(A) Admin");
-            view.println("(S) Student");
-            view.println("(X) Exit");
-            char op = view.readOption("Select an option: ");
+            char op = view.readOption("University System: (A)dmin, (S)tudent, or X: ");
 
             switch (op) {
                 case 'A':
@@ -39,7 +34,7 @@ public class UniversityController {
                     view.println("Invalid option. Please try again.");
             }
         }
-        view.println("Goodbye!");
+        view.println("Thank you");
     }
 
     private void printBanner() {

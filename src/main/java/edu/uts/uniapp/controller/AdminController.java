@@ -17,15 +17,7 @@ public class AdminController {
     public void showMenu() {
         boolean back = false;
         while (!back) {
-            view.println("");
-            view.println("----- Admin System -----");
-            view.println("(S) show students");
-            view.println("(G) group students by grade");
-            view.println("(P) partition students PASS/FAIL");
-            view.println("(R) remove a student by ID");
-            view.println("(C) clear database");
-            view.println("(X) exit");
-            char op = view.readOption("Select an option: ");
+            char op = view.readOption("Admin System (c/g/p/r/s/x): ");
 
             switch (op) {
                 case 'S':

@@ -18,12 +18,7 @@ public class StudentController {
     public void showMenu() {
         boolean back = false;
         while (!back) {
-            view.println("");
-            view.println("----- Student System -----");
-            view.println("(L) login");
-            view.println("(R) register");
-            view.println("(X) exit");
-            char op = view.readOption("Select an option: ");
+            char op = view.readOption("Student System (l/r/x): ");
 
             switch (op) {
                 case 'L':
@@ -50,33 +45,36 @@ public class StudentController {
         }
     }
     private void register() {
-        List<Student> all = Database.readAll();
 
-        String name = view.readLine("Enter name: ");
-        String email = view.readLine("Enter email: ");
-        String pw = view.readLine("Enter password: ");
+        view.println("student sign up");
+        String email = view.readLine("Email: ");
+        String pw = view.readLine("Password: ");
 
         // RegEx 验证
-        if (!email.matches(RegexConstants.EMAIL)) {
-            view.println("Invalid email format. Email must end with @university.com");
+        if (!pw.matches(RegexConstants.PASSWORD)||!email.matches(RegexConstants.EMAIL)) {
+            view.println("Incorrect email or password format");
             return;
+        }else{
+            view.println("Email and password formats acceptable");
         }
-        if (!pw.matches(RegexConstants.PASSWORD)) {
-            view.println("Invalid password format: start with uppercase, then ≥5 letters, then ≥3 digits.");
-            return;
-        }
+
         // 唯一性（按 email）
+        List<Student> all = Database.readAll();
         boolean exists = all.stream().anyMatch(s -> s.getEmail().equalsIgnoreCase(email));
         if (exists) {
             view.println("Student already exists.");
             return;
         }
 
+        String name = view.readLine("Name: ");
+        view.println("Student already exists.");
+
         Student s = new Student(name, email, pw);
         all.add(s);
         Database.writeAll(all);
         view.println("Registration successful! Your ID: " + s.getIdStr());
     }
+
 
     private Student login() {
         List<Student> all = Database.readAll();
@@ -88,13 +86,11 @@ public class StudentController {
         String pw = view.readLine("Password: ");
 
         // 登录前也做格式验证（与样例 I/O 一致）
-        if (!email.matches(RegexConstants.EMAIL)) {
-            view.println("Invalid email format. Email must end with @university.com");
+        if (!pw.matches(RegexConstants.PASSWORD)||!email.matches(RegexConstants.EMAIL)) {
+            view.println("Incorrect email or password format");
             return null;
-        }
-        if (!pw.matches(RegexConstants.PASSWORD)) {
-            view.println("Invalid password format.");
-            return null;
+        }else{
+            view.println("email and password formats acceptable");
         }
 
         for (Student s : all) {
