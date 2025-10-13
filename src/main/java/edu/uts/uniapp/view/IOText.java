@@ -31,20 +31,14 @@ public class IOText {
     public static String textInRed(String str, IndentationLevel system) {
         return ANSI_RED + textWithIndentation(str,system) + ANSI_RESET;
     }
-    public static String textInGreen(String str) {
-        return ANSI_GREEN+str+ANSI_RESET;
+    public static String textInGreen(String str, IndentationLevel system) {
+        return ANSI_GREEN+textWithIndentation(str,system)+ANSI_RESET;
     }
     public static String textInYellow(String str, IndentationLevel system) {
         return ANSI_YELLOW + textWithIndentation(str,system) + ANSI_RESET;
     }
     public static String textInBlue(String str, IndentationLevel system) {
         return ANSI_BLUE + textWithIndentation(str,system) + ANSI_RESET;
-    }
-    public static String textInPurple(String str) {
-        return ANSI_PURPLE+str+ANSI_RESET;
-    }
-    public static String textInCyan(String str) {
-        return ANSI_CYAN+str+ANSI_RESET;
     }
 
     /**
@@ -60,18 +54,53 @@ public class IOText {
      */
     public static final String STU_PROMPT_SELECT = "Student System (l/r/x): ";
 
+    public static final String IPT_EMAIL       = "Email: ";
+    public static final String IPT_PASSWORD    = "Password: ";
+    public static final String IPT_NAME        = "Name: ";
+    public static final String INFO_INVALID    = "Incorrect email or password format";
+    public static final String INFO_VALID      = "email and password formats acceptable";
+
+    public static final String REGISTER_START  = "Student Sign Up";
+    public static final String REGISTER_FAILED  = "Student %s already exists";
+    public static final String REGISTER_SUCCESS = "Enrolling Student %s";
+
+    public static final String LOGIN_START      = "Student Sign In";
+    public static final String LOGIN_FAILED     = "Student dose not exist";
 
     /**
      *  admin system print
      */
 
-    public static final String ADMIN_PROMPT_SELECT = "Admin System (c/g/p/r/s/x): ";
+    public static final String ADM_PROMPT_SELECT = "Admin System (c/g/p/r/s/x): ";
+
+    public static final String ADM_SHOW_NONE     = "(no students)";
+    public static final String ADM_REMOVE_PROMPT = "Enter student id (6 digits): ";
+    public static final String ADM_REMOVE_OK     = "Student removed.";
+    public static final String ADM_REMOVE_NF     = "Student not found.";
+    public static final String ADM_REMOVE_BAD    = "Invalid id.";
+    public static final String ADM_CLEAR_CONFIRM = "Type 'YES' to confirm clearing all students: ";
+    public static final String ADM_CLEAR_OK      = "Database cleared.";
+    public static final String ADM_CLEAR_CANCEL  = "Cancelled.";
 
     /**
      * subject system print
      */
+    public static final String SUB_PROMPT_SELECT = "Student Course Menu (c/e/r/s/x): ";
 
+    public static final String ENR_LIMIT_REACHED = "Students are allowed to enrol in 4 subjects only";
+    public static final String ENR_ENROLLED_FMT  = "Enrolling in Subject-%s";
 
+    public static final String ENR_LIST_HEADER   = "Your are now enrolled in %d out of 4 subjects";
+    public static final String ENR_SHOW_SUB      = "Showing %d subjects";
+    public static final String ENR_REMOVE_PROMPT = "Remove subject by ID: ";
+    public static final String ENR_REMOVE_OK     = "Dropping Subject-%d";
+    public static final String ENR_REMOVE_NF     = "Subject not found.";
+    public static final String ENR_REMOVE_BAD    = "Invalid subject id.";
+
+    public static final String ENR_UPD_PWD       = "Updating Password";
+    public static final String ENR_CONFIRM_PWD   = "Confirm Password: ";
+    public static final String ENR_PWD_PROMPT    = "New Password: ";
+    public static final String ENR_PWD_NOT_MATCH   = "Password does not match - try again";
 
 }
 

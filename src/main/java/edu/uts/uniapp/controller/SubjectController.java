@@ -5,6 +5,7 @@ import edu.uts.uniapp.model.Student;
 import edu.uts.uniapp.model.Subject;
 import edu.uts.uniapp.util.RegexConstants;
 import edu.uts.uniapp.view.CLIView;
+import edu.uts.uniapp.view.IOText;
 
 import java.util.List;
 
@@ -14,14 +15,7 @@ public class SubjectController {
     public void run(Student current, List<Student> all) {
         boolean back = false;
         while (!back) {
-            view.println("");
-            view.println("----- Subject Enrolment System -----");
-            view.println("(C) change password");
-            view.println("(E) enrol");
-            view.println("(R) remove");
-            view.println("(S) show");
-            view.println("(X) exit");
-            char op = view.readOption("Select an option: ");
+            char op = view.readOption(IOText.textInBlue(IOText.SUB_PROMPT_SELECT,IOText.IndentationLevel.SubjectSystem));
 
             switch (op) {
                 case 'C':
@@ -40,60 +34,62 @@ public class SubjectController {
                     back = true;
                     break;
                 default:
-                    view.println("Invalid option. Please try again.");
+                    view.println(IOText.textInRed(IOText.INVALID_OPTION,IOText.IndentationLevel.SubjectSystem));
             }
         }
     }
 
     private void changePassword(Student current, List<Student> all) {
-        String newPw = view.readLine("Enter new password: ");
-        // 不在这里做正则限制，沿用注册规则也可以；如需强制，可在此加入 Regex 校验
+
+        view.println(IOText.textInYellow(IOText.ENR_UPD_PWD, IOText.IndentationLevel.SubjectSystem));
+
+        String newPw = view.readLine(IOText.textWithIndentation(IOText.ENR_PWD_PROMPT,IOText.IndentationLevel.SubjectSystem));
+        String confirmPw = view.readLine(IOText.textWithIndentation(IOText.ENR_CONFIRM_PWD,IOText.IndentationLevel.SubjectSystem));
+
+        if (!newPw.equals(confirmPw)) {
+            view.println(IOText.textInRed(IOText.ENR_PWD_NOT_MATCH,IOText.IndentationLevel.SubjectSystem));
+            return;
+        }
+
         if(newPw.matches(RegexConstants.PASSWORD)) {
             current.setPassword(newPw);
             Database.writeAll(all);
-            view.println("Password changed successfully.");
         }
-        view.println("Invalid email format. Email must end with @university.com");
+        view.println("Invalid password format.");
     }
 
     private void enrol(Student current, List<Student> all) {
         if (!current.canEnrollMore()) {
-            view.println("Cannot enrol in more than four (4) subjects.");
+            view.println(IOText.textInRed(IOText.ENR_LIMIT_REACHED,IOText.IndentationLevel.SubjectSystem));
             return;
         }
         Subject s = new Subject();
         current.enrollSubject(s);
         Database.writeAll(all);
-        view.println("Enrolled: " + s);
-        view.println(String.format("New average: %.1f", current.averageMark()));
+        view.println(IOText.textInYellow(String.format(IOText.ENR_ENROLLED_FMT, s.getId()), IOText.IndentationLevel.SubjectSystem));
+        view.println(IOText.textInYellow(String.format(IOText.ENR_LIST_HEADER, current.getSubjects().size()),IOText.IndentationLevel.SubjectSystem));
     }
 
     private void remove(Student current, List<Student> all) {
-        String idStr = view.readLine("Enter subject id to remove: ");
+        String idStr = view.readLine(IOText.textWithIndentation(IOText.ENR_REMOVE_PROMPT, IOText.IndentationLevel.SubjectSystem));
         try {
             int sid = Integer.parseInt(idStr);
             boolean ok = current.removeSubjectById(sid);
             if (ok) {
                 Database.writeAll(all);
-                view.println("Subject removed.");
+                view.println(IOText.textInYellow(String.format(IOText.ENR_REMOVE_OK, sid), IOText.IndentationLevel.SubjectSystem));
+                view.println(IOText.textInYellow(String.format(IOText.ENR_SHOW_SUB, current.getSubjects().size()), IOText.IndentationLevel.SubjectSystem));
             } else {
-                view.println("Subject not found.");
+                view.println(IOText.textInRed(IOText.ENR_REMOVE_NF,IOText.IndentationLevel.SubjectSystem));
             }
         } catch (NumberFormatException e) {
-            view.println("Invalid subject id.");
+            view.println(IOText.textInRed(IOText.ENR_REMOVE_BAD,IOText.IndentationLevel.SubjectSystem));
         }
     }
 
     private void show(Student current) {
-        view.println("");
-        view.println("Your enrolled subjects:");
-        if (current.getSubjects().isEmpty()) {
-            view.println("(none)");
-        } else {
-            current.getSubjects().forEach(s -> view.println(s.toString())
-            );
-        }
-        view.println(String.format("Average=%.1f, PASS=%s", current.averageMark(), current.isPass() ? "YES" : "NO"));
+        view.println(IOText.textInYellow(String.format(IOText.ENR_SHOW_SUB, current.getSubjects().size()), IOText.IndentationLevel.SubjectSystem));
+        current.getSubjects().forEach(s -> view.println(IOText.textWithIndentation(s.toString(), IOText.IndentationLevel.SubjectSystem)));
     }
 }
 

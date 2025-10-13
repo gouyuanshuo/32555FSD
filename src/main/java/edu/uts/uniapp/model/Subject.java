@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class Subject implements Serializable {
     private int id;
+
+    //TODO: mark should be int
     private double mark;
     private String grade;
 
@@ -41,6 +43,6 @@ public class Subject implements Serializable {
         this.grade = grade;
     }
     public String toString(){
-        return String.format("Subject{id=%03d, mark=%.1f, grade=%s}", id, mark, grade);
+        return String.format("[ Subject::%03d -- mark = %.1f -- grade =  %s ]", id, mark, grade);
     }
 }

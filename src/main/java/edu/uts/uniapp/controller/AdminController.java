@@ -18,7 +18,7 @@ public class AdminController {
     public void showMenu() {
         boolean back = false;
         while (!back) {
-            char op = view.readOption(IOText.textInBlue(IOText.ADMIN_PROMPT_SELECT,IOText.IndentationLevel.AdminSystem));
+            char op = view.readOption(IOText.textInBlue(IOText.ADM_PROMPT_SELECT,IOText.IndentationLevel.AdminSystem));
 
             switch (op) {
                 case 'S':
