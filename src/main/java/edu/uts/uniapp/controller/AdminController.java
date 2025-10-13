@@ -5,6 +5,7 @@ import edu.uts.uniapp.model.Database;
 import edu.uts.uniapp.model.Student;
 import edu.uts.uniapp.model.Subject;
 import edu.uts.uniapp.view.CLIView;
+import edu.uts.uniapp.view.IOText;
 
 import java.util.*;
 
@@ -17,7 +18,7 @@ public class AdminController {
     public void showMenu() {
         boolean back = false;
         while (!back) {
-            char op = view.readOption("Admin System (c/g/p/r/s/x): ");
+            char op = view.readOption(IOText.textInBlue(IOText.ADMIN_PROMPT_SELECT,IOText.IndentationLevel.AdminSystem));
 
             switch (op) {
                 case 'S':

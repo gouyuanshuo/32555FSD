@@ -4,6 +4,7 @@ import edu.uts.uniapp.model.Database;
 import edu.uts.uniapp.model.Student;
 import edu.uts.uniapp.util.RegexConstants;
 import edu.uts.uniapp.view.CLIView;
+import edu.uts.uniapp.view.IOText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class StudentController {
     public void showMenu() {
         boolean back = false;
         while (!back) {
-            char op = view.readOption("Student System (l/r/x): ");
+            char op = view.readOption(IOText.textInBlue(IOText.STU_PROMPT_SELECT,IOText.IndentationLevel.StudentSystem));
 
             switch (op) {
                 case 'L':
