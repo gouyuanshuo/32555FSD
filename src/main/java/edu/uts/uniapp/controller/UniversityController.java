@@ -3,6 +3,7 @@ package edu.uts.uniapp.controller;
 
 
 import edu.uts.uniapp.view.CLIView;
+import edu.uts.uniapp.view.IOText;
 
 /**
  * University top menu：
@@ -14,11 +15,10 @@ public class UniversityController {
     private final AdminController adminController = new AdminController();
 
     public void start() {
-        //printBanner();
 
         boolean running = true;
         while (running) {
-            char op = view.readOption("University System: (A)dmin, (S)tudent, or X: ");
+            char op = view.readOption(IOText.textInRed("University System: (A)dmin, (S)tudent, or X: "));
 
             switch (op) {
                 case 'A':
