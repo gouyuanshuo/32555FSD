@@ -44,18 +44,23 @@ public class SubjectController {
         view.println(IOText.textInYellow(IOText.ENR_UPD_PWD, IOText.IndentationLevel.SubjectSystem));
 
         String newPw = view.readLine(IOText.textWithIndentation(IOText.ENR_PWD_PROMPT,IOText.IndentationLevel.SubjectSystem));
-        String confirmPw = view.readLine(IOText.textWithIndentation(IOText.ENR_CONFIRM_PWD,IOText.IndentationLevel.SubjectSystem));
-
-        if (!newPw.equals(confirmPw)) {
-            view.println(IOText.textInRed(IOText.ENR_PWD_NOT_MATCH,IOText.IndentationLevel.SubjectSystem));
-            return;
+        boolean passwordNowMatch=true;
+        while(passwordNowMatch){
+            String confirmPw = view.readLine(IOText.textWithIndentation(IOText.ENR_CONFIRM_PWD,IOText.IndentationLevel.SubjectSystem));
+            if (!newPw.equals(confirmPw)) {
+                view.println(IOText.textInRed(IOText.ENR_PWD_NOT_MATCH,IOText.IndentationLevel.SubjectSystem));
+            }else{
+                passwordNowMatch=false;
+            }
         }
 
         if(newPw.matches(RegexConstants.PASSWORD)) {
             current.setPassword(newPw);
             Database.writeAll(all);
+        }else{
+            view.println(IOText.textInRed(IOText.ENR_PWD_INVALID,IOText.IndentationLevel.SubjectSystem));
         }
-        view.println("Invalid password format.");
+
     }
 
     private void enrol(Student current, List<Student> all) {
@@ -78,7 +83,7 @@ public class SubjectController {
             if (ok) {
                 Database.writeAll(all);
                 view.println(IOText.textInYellow(String.format(IOText.ENR_REMOVE_OK, sid), IOText.IndentationLevel.SubjectSystem));
-                view.println(IOText.textInYellow(String.format(IOText.ENR_SHOW_SUB, current.getSubjects().size()), IOText.IndentationLevel.SubjectSystem));
+                view.println(IOText.textInYellow(String.format(IOText.ENR_LIST_HEADER, current.getSubjects().size()), IOText.IndentationLevel.SubjectSystem));
             } else {
                 view.println(IOText.textInRed(IOText.ENR_REMOVE_NF,IOText.IndentationLevel.SubjectSystem));
             }

@@ -30,6 +30,6 @@ public class CLIView {
      */
     public char readOption(String prompt) {
         String s = readLine(prompt);
-        return s.isEmpty() ? '\0' : Character.toUpperCase(s.charAt(0));
+        return (s.length() != 1) ? '\0' : Character.toUpperCase(s.charAt(0));
     }
 }

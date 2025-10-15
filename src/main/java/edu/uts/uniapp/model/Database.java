@@ -7,7 +7,6 @@ import java.util.List;
 public class Database {
     private static final String FILE = "students.data";
 
-    @SuppressWarnings("unchecked")
     public static List<Student> readAll() {
         File f = new File(FILE);
         if (!f.exists()) return new ArrayList<>();

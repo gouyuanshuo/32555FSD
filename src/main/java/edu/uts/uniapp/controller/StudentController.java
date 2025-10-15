@@ -26,11 +26,8 @@ public class StudentController {
             switch (op) {
                 case 'L':
                     Student currentStudent=login();
-                    System.out.println(currentStudent);
                     if (currentStudent != null) {
-                        // 进入选课子系统
                         List<Student> all = Database.readAll();
-                        // 重新从列表里拿同一个引用（避免序列化拷贝差异）
                         Student ref = all.stream()
                                 .filter(s -> s.getEmail().equalsIgnoreCase(currentStudent.getEmail()))
                                 .findFirst().orElse(currentStudent);

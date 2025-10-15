@@ -22,9 +22,16 @@ public class Student implements Serializable {
 
     public boolean canEnrollMore() { return subjects.size() < 4; }
 
+    public String grade() {
+        if (averageMark() >= 85) return "HD";
+        else if (averageMark() >= 75) return "D";
+        else if (averageMark() >= 65) return "C";
+        else if (averageMark() >= 50) return "P";
+        else return "F";
+    }
+
     public void enrollSubject(Subject subject) {
-        if (canEnrollMore()) subjects.add(subject);
-        else System.out.println("Cannot enrol more than 4 subjects.");
+        subjects.add(subject);
     }
 
     public boolean removeSubjectById(int subjectId) {
@@ -65,10 +72,10 @@ public class Student implements Serializable {
     }
 
     public String toString() {
-        return String.format(
-                "Student{id=%s, name='%s', email='%s', avg=%.1f, pass=%s, subjects=%d}",
-                getIdStr(), name, email, averageMark(), isPass() ? "Y" : "N", subjects.size()
-        );
+        return String.format("%s :: %s --> GRADE: %s - MARK: %.2f", getName(), getIdStr(), grade(), averageMark());
+    }
+    public String info(){
+        return String.format("%s :: %s --> Email: %s", getName(), getIdStr(), getEmail());
     }
 }
 

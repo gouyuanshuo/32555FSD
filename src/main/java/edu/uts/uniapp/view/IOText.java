@@ -47,6 +47,7 @@ public class IOText {
     public static final String UNI_PROMPT_SELECT = "University System: (A)dmin, (S)tudent, or X: ";
     public static final String INVALID_OPTION = "Invalid option. Please try again.";
     public static final String THANK_YOU = "Thank You";
+    public static final String INVALID_INPUT= "Invalid input";
 
 
     /**
@@ -73,14 +74,18 @@ public class IOText {
 
     public static final String ADM_PROMPT_SELECT = "Admin System (c/g/p/r/s/x): ";
 
-    public static final String ADM_SHOW_NONE     = "(no students)";
-    public static final String ADM_REMOVE_PROMPT = "Enter student id (6 digits): ";
-    public static final String ADM_REMOVE_OK     = "Student removed.";
-    public static final String ADM_REMOVE_NF     = "Student not found.";
-    public static final String ADM_REMOVE_BAD    = "Invalid id.";
-    public static final String ADM_CLEAR_CONFIRM = "Type 'YES' to confirm clearing all students: ";
-    public static final String ADM_CLEAR_OK      = "Database cleared.";
-    public static final String ADM_CLEAR_CANCEL  = "Cancelled.";
+    public static final String ADM_SHOW_NONE     = "< Nothing to Display >";
+    public static final String ADM_REMOVE_PROMPT = "Removing by ID: ";
+    public static final String ADM_REMOVE_OK     = "Removing Student %s Account";
+    public static final String ADM_REMOVE_NF     = "Student %s does not exist";
+    public static final String ADM_REMOVE_BAD    = "Invalid id";
+    public static final String ADM_CLEAR_CONFIRM = "Are you sure you want to clear the database (Y)es/(N)o: ";
+    public static final String ADM_CLEAR_OK      = "Students data cleared";
+    public static final String ADM_CLEAR_START   = "Clearing Students database";
+    public static final String ADM_SHOW_STU      = "Student List";
+    public static final String ADM_GROUP_GRD     = "Grade Grouping";
+    public static final String ADM_GROUP_PF      = "PASS/FAIL Partition";
+
 
     /**
      * subject system print
@@ -100,7 +105,8 @@ public class IOText {
     public static final String ENR_UPD_PWD       = "Updating Password";
     public static final String ENR_CONFIRM_PWD   = "Confirm Password: ";
     public static final String ENR_PWD_PROMPT    = "New Password: ";
-    public static final String ENR_PWD_NOT_MATCH   = "Password does not match - try again";
+    public static final String ENR_PWD_NOT_MATCH  = "Password does not match - try again";
+    public static final String ENR_PWD_INVALID   ="Invalid password format";
 
 }
 
