@@ -61,7 +61,7 @@ public class EnrolmentController {
     @FXML
     private void onShow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/uts/cliuniapp/view/subjects.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/uts/uniapp/view/subjects.fxml"));
             Scene scene = new Scene(loader.load());
             SubjectController sc = loader.getController();
             sc.init(current);
@@ -93,7 +93,7 @@ public class EnrolmentController {
     @FXML
     private void onLogout() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/uts/cliuniapp/view/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/uts/uniapp/view/login.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = (Stage) userLabel.getScene().getWindow();
             stage.setScene(scene);

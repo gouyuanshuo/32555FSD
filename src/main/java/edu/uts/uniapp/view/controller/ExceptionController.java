@@ -33,7 +33,7 @@ public class ExceptionController {
 
     private static void open(String title, String msg) {
         try {
-            FXMLLoader loader = new FXMLLoader(ExceptionController.class.getResource("/edu/uts/cliuniapp/view/exception.fxml"));
+            FXMLLoader loader = new FXMLLoader(ExceptionController.class.getResource("/edu/uts/uniapp/view/exception.fxml"));
             Scene scene = new Scene(loader.load());
             ExceptionController ctrl = loader.getController();
             ctrl.init(title, msg);

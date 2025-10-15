@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="edu.uts.uniapp.view.controller.SubjectController"
-      spacing="10" style="-fx-padding:20;">
-    <Label text="Enrolled Subjects" style="-fx-font-size:18;-fx-font-weight:bold;"/>
-    <TableView fx:id="table" prefWidth="400" prefHeight="250">
+<VBox spacing="10" style="-fx-padding:20;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.uts.uniapp.view.controller.SubjectController">
+    <Label style="-fx-font-size:18;-fx-font-weight:bold;" text="Enrolled Subjects" />
+    <TableView fx:id="table" prefHeight="250" prefWidth="400">
         <columns>
-            <TableColumn fx:id="idCol" text="ID" prefWidth="80"/>
-            <TableColumn fx:id="markCol" text="Mark" prefWidth="120"/>
-            <TableColumn fx:id="gradeCol" text="Grade" prefWidth="120"/>
+            <TableColumn fx:id="idCol" prefWidth="80" text="ID" />
+            <TableColumn fx:id="markCol" prefWidth="120" text="Mark" />
+            <TableColumn fx:id="gradeCol" prefWidth="198.6666717529297" text="Grade" />
         </columns>
     </TableView>
-    <Label fx:id="summaryLabel" style="-fx-text-fill:#666;"/>
-    <Button text="Close" onAction="#onClose" alignment="CENTER_RIGHT"/>
+    <Label fx:id="summaryLabel" style="-fx-text-fill:#666;" />
+    <Button alignment="CENTER_RIGHT" onAction="#onClose" text="Close" />
 </VBox>

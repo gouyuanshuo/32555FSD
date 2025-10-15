@@ -27,15 +27,11 @@ public class Subject implements Serializable {
     public int getId() {
         return id;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
+
     public double getMark() {
         return mark;
     }
-    public void setMark(double mark) {
-        this.mark = mark;
-    }
+
     public String getGrade() {
         return grade;
     }
