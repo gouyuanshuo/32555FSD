@@ -4,13 +4,17 @@ import edu.uts.uniapp.model.Database;
 import edu.uts.uniapp.model.Student;
 import edu.uts.uniapp.util.RegexConstants;
 import edu.uts.uniapp.view.CLIView;
+import edu.uts.uniapp.view.IOText;
 
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /***
  * students system，next:register/login/）
  **/
+
 public class StudentController {
     private final CLIView view = new CLIView();
     SubjectController subjectController = new SubjectController();
@@ -18,15 +22,12 @@ public class StudentController {
     public void showMenu() {
         boolean back = false;
         while (!back) {
-            char op = view.readOption("Student System (l/r/x): ");
-
+            char op = view.readOption(IOText.textInBlue(IOText.STU_PROMPT_SELECT,IOText.IndentationLevel.StudentSystem));
             switch (op) {
                 case 'L':
                     Student currentStudent=login();
                     if (currentStudent != null) {
-                        // 进入选课子系统
                         List<Student> all = Database.readAll();
-                        // 重新从列表里拿同一个引用（避免序列化拷贝差异）
                         Student ref = all.stream()
                                 .filter(s -> s.getEmail().equalsIgnoreCase(currentStudent.getEmail()))
                                 .findFirst().orElse(currentStudent);
@@ -40,39 +41,49 @@ public class StudentController {
                     back = true;
                     break;
                 default:
-                    view.println("Invalid option. Please try again.");
+                    view.println(IOText.textInRed(IOText.INVALID_OPTION,IOText.IndentationLevel.StudentSystem));
             }
         }
     }
+    private record EmailAndPwd(String email, String pwd) {}
+
+    private EmailAndPwd get11(){
+        String email = "";
+        String pw = "";
+        boolean invaildInfo = true;
+        while (invaildInfo) {
+            email = view.readLine(IOText.textWithIndentation(IOText.IPT_EMAIL,IOText.IndentationLevel.StudentSystem));
+            pw = view.readLine(IOText.textWithIndentation(IOText.IPT_PASSWORD,IOText.IndentationLevel.StudentSystem));
+
+            // RegEx check
+            if (!pw.matches(RegexConstants.PASSWORD)||!email.matches(RegexConstants.EMAIL)) {
+                view.println(IOText.textInRed(IOText.INFO_INVALID, IOText.IndentationLevel.StudentSystem));
+            }else{
+                invaildInfo=false;
+                view.println(IOText.textInYellow(IOText.INFO_VALID, IOText.IndentationLevel.StudentSystem));
+            }
+        }
+        return new EmailAndPwd(email, pw);
+    }
+
     private void register() {
 
-        view.println("student sign up");
-        String email = view.readLine("Email: ");
-        String pw = view.readLine("Password: ");
-
-        // RegEx 验证
-        if (!pw.matches(RegexConstants.PASSWORD)||!email.matches(RegexConstants.EMAIL)) {
-            view.println("Incorrect email or password format");
-            return;
-        }else{
-            view.println("Email and password formats acceptable");
-        }
+        view.println(IOText.textInGreen(IOText.REGISTER_START,IOText.IndentationLevel.StudentSystem));
+        final EmailAndPwd emailAndPwd=get11();
 
         // 唯一性（按 email）
         List<Student> all = Database.readAll();
-        boolean exists = all.stream().anyMatch(s -> s.getEmail().equalsIgnoreCase(email));
-        if (exists) {
-            view.println("Student already exists.");
-            return;
+        Optional<Student> exists = all.stream().filter(s -> s.getEmail().equalsIgnoreCase(emailAndPwd.email)).findFirst();
+
+        if (exists.isPresent()) {
+            view.println(IOText.textInRed(String.format(IOText.REGISTER_FAILED, exists.get().getName()),IOText.IndentationLevel.StudentSystem));
+        }else {
+            String name = view.readLine(IOText.textWithIndentation(IOText.IPT_NAME,IOText.IndentationLevel.StudentSystem));
+            Student s = new Student(name, emailAndPwd.email, emailAndPwd.pwd);
+            all.add(s);
+            Database.writeAll(all);
+            view.println(IOText.textInYellow(String.format(IOText.REGISTER_SUCCESS,name),IOText.IndentationLevel.StudentSystem));
         }
-
-        String name = view.readLine("Name: ");
-        view.println("Student already exists.");
-
-        Student s = new Student(name, email, pw);
-        all.add(s);
-        Database.writeAll(all);
-        view.println("Registration successful! Your ID: " + s.getIdStr());
     }
 
 
@@ -82,24 +93,17 @@ public class StudentController {
             all = new ArrayList<>();
         }
 
-        String email = view.readLine("Email: ");
-        String pw = view.readLine("Password: ");
+        view.println(IOText.textInGreen(IOText.LOGIN_START,IOText.IndentationLevel.StudentSystem));
+        final EmailAndPwd emailAndPwd=get11();
 
-        // 登录前也做格式验证（与样例 I/O 一致）
-        if (!pw.matches(RegexConstants.PASSWORD)||!email.matches(RegexConstants.EMAIL)) {
-            view.println("Incorrect email or password format");
-            return null;
-        }else{
-            view.println("email and password formats acceptable");
-        }
+        //Optional<Student> exists = all.stream().filter(s -> s.getEmail().equalsIgnoreCase(emailAndPwd.email)&& s.getPassword().equals(emailAndPwd.pwd)).findFirst();
 
         for (Student s : all) {
-            if (s.getEmail().equalsIgnoreCase(email) && s.getPassword().equals(pw)) {
-                view.println("Login successful.");
+            if (s.getEmail().equalsIgnoreCase(emailAndPwd.email) && s.getPassword().equals(emailAndPwd.pwd)) {
                 return s;
             }
         }
-        view.println("Invalid credentials.");
+        view.println(IOText.textInRed(IOText.LOGIN_FAILED, IOText.IndentationLevel.StudentSystem));
         return null;
     }
 }

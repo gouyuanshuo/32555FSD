@@ -1,9 +1,10 @@
 package edu.uts.uniapp.controller;
 
 
-
 import edu.uts.uniapp.view.CLIView;
 import edu.uts.uniapp.view.IOText;
+
+
 
 /**
  * University top menu：
@@ -18,8 +19,7 @@ public class UniversityController {
 
         boolean running = true;
         while (running) {
-            char op = view.readOption(IOText.textInRed("University System: (A)dmin, (S)tudent, or X: "));
-
+            char op = view.readOption(IOText.textInBlue(IOText.UNI_PROMPT_SELECT, IOText.IndentationLevel.UniversitySystem));
             switch (op) {
                 case 'A':
                     adminController.showMenu();
@@ -31,15 +31,9 @@ public class UniversityController {
                     running = false;
                     break;
                 default:
-                    view.println("Invalid option. Please try again.");
+                    view.println(IOText.textInRed(IOText.INVALID_OPTION,IOText.IndentationLevel.UniversitySystem));
             }
         }
-        view.println("Thank you");
-    }
-
-    private void printBanner() {
-        view.println("=======================================");
-        view.println("   CLIUniApp - University Application   ");
-        view.println("=======================================");
+        view.println(IOText.textInYellow(IOText.THANK_YOU, IOText.IndentationLevel.UniversitySystem));
     }
 }
