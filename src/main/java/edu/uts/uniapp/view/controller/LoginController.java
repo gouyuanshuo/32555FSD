@@ -53,7 +53,7 @@ public class LoginController {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/uts/cliuniapp/view/enrolment.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/uts/uniapp/view/enrolment.fxml"));
             Scene scene = new Scene(loader.load());
             EnrolmentController controller = loader.getController();
             controller.init(found);

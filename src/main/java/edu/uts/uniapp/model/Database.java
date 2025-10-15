@@ -21,7 +21,7 @@ public class Database {
     public static void writeAll(List<Student> students) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE))) {
             oos.writeObject(students);
-        } catch (IOException e) {
+    } catch (IOException e) {
             e.printStackTrace();
         }
     }
