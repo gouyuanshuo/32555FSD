@@ -79,7 +79,17 @@ public class StudentController {
             view.println(IOText.textInRed(String.format(IOText.REGISTER_FAILED, exists.get().getName()),IOText.IndentationLevel.StudentSystem));
         }else {
             String name = view.readLine(IOText.textWithIndentation(IOText.IPT_NAME,IOText.IndentationLevel.StudentSystem));
+
             Student s = new Student(name, emailAndPwd.email, emailAndPwd.pwd);
+            boolean inValidID=true;
+            while(inValidID){
+                final Student fs=s;
+                if(all.stream().anyMatch((student )->{return student.getId()==fs.getId();})){
+                    s = new Student(name, emailAndPwd.email, emailAndPwd.pwd);
+                }else{
+                    inValidID=false;
+                }
+            }
             all.add(s);
             Database.writeAll(all);
             view.println(IOText.textInYellow(String.format(IOText.REGISTER_SUCCESS,name),IOText.IndentationLevel.StudentSystem));
