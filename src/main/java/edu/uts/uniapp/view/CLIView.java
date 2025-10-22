@@ -29,7 +29,7 @@ public class CLIView {
      * 读取用户选项（只取第一个非空字符，转为大写）。
      */
     public char readOption(String prompt) {
-        String s = readLine(prompt);
+        final String s = readLine(prompt);
         return (s.length() != 1) ? '\0' : Character.toUpperCase(s.charAt(0));
     }
 }
