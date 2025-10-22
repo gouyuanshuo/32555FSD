@@ -27,7 +27,8 @@ public class Student implements Serializable {
         else if (averageMark() >= 75) return "D";
         else if (averageMark() >= 65) return "C";
         else if (averageMark() >= 50) return "P";
-        else return "F";
+        else if (averageMark() >= 25) return "F";
+        else return "N/A";
     }
 
     public void enrollSubject(Subject subject) {
