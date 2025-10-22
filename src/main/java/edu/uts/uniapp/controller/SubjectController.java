@@ -69,6 +69,16 @@ public class SubjectController {
             return;
         }
         Subject s = new Subject();
+        boolean inValidID=true;
+        while (inValidID) {
+            final Subject fSubject=s;
+            if (all.stream().anyMatch((st)->{return st.getSubjects().stream().anyMatch((subject)->{return subject.getId()==fSubject.getId();});})){
+                s = new Subject();
+            }else{
+                inValidID=false;
+            }
+        }
+
         current.enrollSubject(s);
         Database.writeAll(all);
         view.println(IOText.textInYellow(String.format(IOText.ENR_ENROLLED_FMT, s.getId()), IOText.IndentationLevel.SubjectSystem));
