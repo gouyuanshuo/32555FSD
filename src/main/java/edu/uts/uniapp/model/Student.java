@@ -14,7 +14,7 @@ public class Student implements Serializable {
     private List<Subject> subjects = new ArrayList<>();
 
     public Student(String name, String email, String password) {
-        this.id = new Random().nextInt(900000) + 100000;
+        this.id = new Random().nextInt(1000000) ;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -69,7 +69,7 @@ public class Student implements Serializable {
     }
 
     public String getIdStr(){
-        return String.valueOf(id);
+        return String.format("%06d", id);
     }
 
     public String toString() {
