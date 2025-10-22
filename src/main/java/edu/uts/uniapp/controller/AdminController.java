@@ -105,12 +105,12 @@ public class AdminController {
             final boolean removed = all.removeIf(s -> s.getId() == id);
             if (removed) {
                 Database.writeAll(all);
-                view.println(IOText.textInYellow(IOText.ADM_REMOVE_OK, IOText.IndentationLevel.AdminSystem));
+                view.println(IOText.textInYellow(String.format(IOText.ADM_REMOVE_OK,idStr), IOText.IndentationLevel.AdminSystem));
             }else {
-                view.println(IOText.textInYellow(IOText.ADM_REMOVE_NF, IOText.IndentationLevel.AdminSystem));
+                view.println(IOText.textInRed(String.format(IOText.ADM_REMOVE_NF,idStr), IOText.IndentationLevel.AdminSystem));
             }
         } catch (NumberFormatException e) {
-            view.println(IOText.textInYellow(IOText.ADM_REMOVE_BAD, IOText.IndentationLevel.AdminSystem));
+            view.println(IOText.textInRed(IOText.ADM_REMOVE_BAD, IOText.IndentationLevel.AdminSystem));
         }
     }
 
