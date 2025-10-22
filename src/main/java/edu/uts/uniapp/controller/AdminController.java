@@ -99,7 +99,11 @@ public class AdminController {
 
     private void removeById() {
         String idStr = view.readLine(IOText.textWithIndentation(IOText.ADM_REMOVE_PROMPT, IOText.IndentationLevel.AdminSystem));
+
         try {
+            if(idStr.length()!=6){
+                throw new IllegalArgumentException();
+            }
             final int id = Integer.parseInt(idStr);
             List<Student> all = Database.readAll();
             final boolean removed = all.removeIf(s -> s.getId() == id);
@@ -109,7 +113,7 @@ public class AdminController {
             }else {
                 view.println(IOText.textInRed(String.format(IOText.ADM_REMOVE_NF,idStr), IOText.IndentationLevel.AdminSystem));
             }
-        } catch (NumberFormatException e) {
+        } catch (IllegalArgumentException e){
             view.println(IOText.textInRed(IOText.ADM_REMOVE_BAD, IOText.IndentationLevel.AdminSystem));
         }
     }
