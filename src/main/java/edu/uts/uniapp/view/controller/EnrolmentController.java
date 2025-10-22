@@ -4,6 +4,8 @@ package edu.uts.uniapp.view.controller;
 import edu.uts.uniapp.model.Database;
 import edu.uts.uniapp.model.Student;
 import edu.uts.uniapp.model.Subject;
+import edu.uts.uniapp.util.RegexConstants;
+import edu.uts.uniapp.view.IOText;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -30,6 +32,16 @@ public class EnrolmentController {
             return;
         }
         Subject s = new Subject();
+        boolean inValidID=true;
+        List<Student> all = Database.readAll();
+        while (inValidID) {
+            final Subject fSubject=s;
+            if (all.stream().anyMatch((st)->{return st.getSubjects().stream().anyMatch((subject)->{return subject.getId()==fSubject.getId();});})){
+                s = new Subject();
+            }else{
+                inValidID=false;
+            }
+        }
         current.enrollSubject(s);
         updateDB();
         refresh();
@@ -81,8 +93,11 @@ public class EnrolmentController {
         dlg.setHeaderText(null);
         dlg.setContentText("Enter new password:");
         dlg.showAndWait().ifPresent(pwd -> {
-            if (pwd.isEmpty()) showException("Password cannot be empty.");
-            else {
+            if (pwd.isEmpty()) {
+                showException("Password cannot be empty.");
+            }else if(!pwd.matches(RegexConstants.PASSWORD)){
+                showException(IOText.GUI_PWD_INCORRECT);
+            }else {
                 current.setPassword(pwd);
                 updateDB();
                 showInfo("Password changed successfully.\nYou may reuse the same password.");
@@ -104,7 +119,7 @@ public class EnrolmentController {
     }
 
     private void refresh() {
-        countLabel.setText("Subjects: " + current.getSubjects().size() + "/4");
+        countLabel.setText(String.format("Subjects: %d/4", current.getSubjects().size()));
         avgLabel.setText(String.format("Average: %.1f", current.averageMark()));
         passLabel.setText("PASS: " + (current.isPass() ? "YES" : "NO"));
     }

@@ -6,7 +6,7 @@ import java.util.Random;
 public class Subject implements Serializable {
     private int id;
 
-    private int mark;
+    private final int mark;
     private String grade;
 
     public Subject() {
