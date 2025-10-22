@@ -53,7 +53,6 @@ public class SubjectController {
                 passwordNowMatch=false;
             }
         }
-
         if(newPw.matches(RegexConstants.PASSWORD)) {
             current.setPassword(newPw);
             Database.writeAll(all);

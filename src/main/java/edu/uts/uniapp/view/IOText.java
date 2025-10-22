@@ -108,5 +108,10 @@ public class IOText {
     public static final String ENR_PWD_NOT_MATCH  = "Password does not match - try again";
     public static final String ENR_PWD_INVALID   ="Invalid password format";
 
+
+    /**
+     * GUI print
+     */
+    public static final String GUI_PWD_INCORRECT = "Invalid password format";
 }
 
