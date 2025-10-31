@@ -21,14 +21,14 @@ public class EnrolmentController {
 
     public void init(Student student) {
         this.current = student;
-        userLabel.setText("Logged in: " + student.getEmail());
+        userLabel.setText(IOText.GUI_LOGIN + student.getEmail());
         refresh();
     }
 
     @FXML
     private void onEnrol() {
         if (!current.canEnrollMore()) {
-            showException("You cannot enrol in more than four (4) subjects.");
+            showException(IOText.GUI_ENR_FAIL);
             return;
         }
         Subject s = new Subject();
