@@ -113,5 +113,7 @@ public class IOText {
      * GUI print
      */
     public static final String GUI_PWD_INCORRECT = "Invalid password format";
+    public static final String GUI_LOGIN   ="Logged in: ";
+    public static final String GUI_ENR_FAIL = "You cannot enrol in more than four (4) subjects.";
 }
 
